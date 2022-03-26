@@ -2,6 +2,8 @@ package com.company;
 
 import java.util.Arrays;
 
+import static java.lang.System.*;
+
 public class MyArray {
     int length;
     String[] data;
@@ -17,31 +19,49 @@ public class MyArray {
         myArray.push("hi");
         myArray.push("you");
         myArray.push("!");
-        System.out.println(Arrays.toString(myArray.data));
+        out.println(Arrays.toString(myArray.data));
         myArray.pop();
-        System.out.println(Arrays.toString(myArray.data));
-//        myArray.deleteAtIndex(0);
+        out.println("after pop="+Arrays.toString(myArray.data));
+        myArray.deleteAtIndex(0);
+        out.println("after delete_index="+Arrays.toString(myArray.data));
         myArray.push("are");
         myArray.push("nice");
-//        myArray.shiftItems(0);
+        myArray.shiftItems(0);
 
 
-        System.out.println(Arrays.deepToString(myArray.data));
+        out.println(Arrays.deepToString(myArray.data));
+    }
+
+    private String deleteAtIndex(int index) {
+        out.println("MyArray.deleteAtIndex index="+index);
+    String item = data[index];
+        out.println("item = " + item);
+        shiftItems(index);
+        return item;
+    }
+    private void  shiftItems(int index) {
+        for (int i = index; i < length - 1; i++) {
+            data[i] = data[i + 1];
+        }
+        out.println("this.data[this.length - 1] = " + this.data[this.length - 1]);
+        deleteLast();
+        out.println("length = " + length);
+        this.length--;
     }
 
     private String pop() {
         String lastItem = data[length - 1];
-        data = deleteLast();
+        deleteLast();
         length--;
         return lastItem;
     }
 
-    private String[] deleteLast() {
+    private void deleteLast() {
         String[] newData = new String[length - 1];
         for (int i = 0; i < this.length - 1; i++) {
             newData[i] = data[i];
         }
-        return newData;
+        data = newData;
     }
 
     private String[] push(String item) {

@@ -9,7 +9,8 @@ public class MergeSortedArrays {
 
         int[] array1 = new int[]{0, 3, 4, 31};
         int[] array2 = new int[]{3, 4, 6, 30};
-        int[] rez = mergeSortedArrays(array1, array2);
+//        int[] rez = mergeSortedArrays(array1, array2);
+        int[] rez = merge(array1, array2);
         out.println(Arrays.toString(rez));
 //        System.out.println("reverse(" + forReverse + ") = " + reverse(forReverse));
     }
@@ -39,26 +40,48 @@ public class MergeSortedArrays {
         int current = 0;
 
         while (current < (array1.length + array2.length)) {
-//            max = (a > b) ? a : b;
-//            if (index1 > array1.length)
             Integer unmerged1 = (index1 < array1.length) ? array1[index1]:null;
             Integer unmerged2 = (index2 < array2.length) ? array2[index2]:null;
 
             if (unmerged2==null || unmerged1 < unmerged2) {
-//                console.log("if1 unmerged1="+unmerged1 + " index1="+index1 + " current="+current);
                 mergedArray[current] = unmerged1;
                 index1++;
-
-                // if next comes from arr2
             } else {
-//                console.log("if2 unmerged2="+unmerged2 + " index2="+index2 + " current="+current);
                 mergedArray[current] = unmerged2;
                 index2++;
             }
-
             current++;
         }
         return mergedArray;
+    }
+
+    public static int[] merge(int[] array1, int[] array2) {
+
+        int array1Length = array1.length;
+        int array2Length = array2.length;
+
+        int[] merged = new int[array1Length + array2Length];
+
+        int array1Position, array2Position, mergedPosition;
+        array1Position = array2Position = mergedPosition = 0;
+
+        while(array1Position < array1Length && array2Position < array2Length) {
+            if (array1[array1Position] < array2[array2Position]) {
+                merged[mergedPosition++] = array1[array1Position++];
+            } else {
+                merged[mergedPosition++] = array2[array2Position++];
+            }
+        }
+
+        while (array1Position < array1Length) {
+            merged[mergedPosition++] = array1[array1Position++];
+        }
+
+        while (array2Position < array2Length) {
+            merged[mergedPosition++] = array2[array2Position++];
+        }
+
+        return merged;
     }
 
 //console.log(mergeSortedArrays(array1,array2));

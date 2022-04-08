@@ -3,11 +3,9 @@ package com.griddynamics;
 // Installed Libraries: JSON-Simple, JUNit 4, Apache Commons Lang3
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /*
 You are developing an application, which analyzes geographical data.
@@ -21,6 +19,18 @@ class MyCode {
 
 
     public static void main(String[] args) {
+
+        IntStream.iterate(1, x -> x + 1)
+//                .sorted()
+                .limit(5)
+                .forEach(System.out::println);
+
+        List<String> list= new ArrayList<>(Arrays.asList("A","B","C"));
+        list.stream().forEach(x->{
+            if (x.equals("A")) {
+                list.remove(x);
+            }
+        });
         //here
         Map<String, Long> result = new HashMap<>();
         List<Country> countries = new ArrayList<>();

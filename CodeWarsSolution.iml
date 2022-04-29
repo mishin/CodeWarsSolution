@@ -18,5 +18,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="KotlinJavaRuntime" level="project" />
+    <orderEntry type="library" name="paumard.streams.utils" level="application" />
   </component>
 </module>
